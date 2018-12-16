@@ -1,6 +1,7 @@
 package jp.co.mo.imggallery
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -52,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//            TODO
             Picasso.get()
                     .load(photos[position].url)
                     .placeholder(R.drawable.loading)
@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity() {
                 itemView.setOnClickListener({
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        val photo = photos[position]
-                        // TODO: change activity
-//                        val intent = Intent(context, Pho)
+                        val intent: Intent = Intent(context, PhotoDetailActivity::class.java)
+                        intent.putExtra(PhotoDetailActivity.EXTRA_KEY_PHOTO, photos[position])
+                        startActivity(intent)
                     }
                 })
             }
